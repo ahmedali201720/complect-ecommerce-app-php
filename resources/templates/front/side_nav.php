@@ -4,13 +4,11 @@
     <?php
 
          $query = "SELECT * FROM categories";
-         $result = mysqli_query($connection , $query);
+         $categories = query($query);
 
-         if(!$result){
-             die("Connection failed" . ' ' . mysqli_error($connection));
-         }
+         confirm($categories);
          
-         while($row = mysqli_fetch_array($result)){
+         while($row = fetch_array($categories)){
              echo "<a href='category.html' class='list-group-item'>{$row['title']}</a>";
          }
 
