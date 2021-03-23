@@ -18,4 +18,4 @@ defined("DB_PASSWORD") ? null : define("DB_PASSWORD", "");
 defined("DB_NAME") ? null : define("DB_NAME", "ecommerce_db");
 
 // Database Connection
-$connection = new mysqli(DB_HOST,DB_USER,DB_PASSWORD);
+$connection = new mysqli(DB_HOST,DB_USER,DB_PASSWORD , DB_NAME);
