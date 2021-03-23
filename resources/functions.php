@@ -2,6 +2,6 @@
 
 require_once("config.php");
 
-if($connection){
-    echo "Connected Successfully";
+if($connection->connect_error){
+    echo "Failed to connect to database";
 }
