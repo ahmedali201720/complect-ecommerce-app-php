@@ -74,3 +74,28 @@ DELIMITER;
 
     }
 }
+
+function get_specific_category_products(){
+    $query = query("SELECT * from products where cat_id =" . escape_string($_GET['id']) . " ");
+    confirm($query);
+    while( $row = fetch_array($query) ){
+        $products = <<< DELIMITER
+         <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail" style="height:500px;">
+                    <img src="{$row['product_image']}" alt="product" style="width: 100%;height: auto;max-height: 200px;overflow: auto;">
+                    <div class="caption">
+                        <h3>{$row['title']}</h3>
+                        <p>{$row['short_desc']}</p>
+                        <p>
+                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['id']}" class="btn btn-primary">More Info</a>
+                        </p>
+                    </div>
+                </div>
+            </div>               
+DELIMITER;
+
+        echo $products;
+
+
+    }
+}
