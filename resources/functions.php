@@ -99,3 +99,28 @@ DELIMITER;
 
     }
 }
+
+function get_shop_products(){
+    $query = query("SELECT * from products");
+    confirm($query);
+    while( $row = fetch_array($query) ){
+        $products = <<< DELIMITER
+         <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail" style="height: 400px;overflow: auto;">
+                    <img src="{$row['product_image']}" alt="product" style="width: 100%;height: auto;max-height: 200px;overflow: auto;">
+                    <div class="body" style="padding: 10px">
+                         <h3>{$row['title']}</h3>
+                    <p>{$row['short_desc']}</p>
+                    <div class="mb-3">
+                        <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['id']}" class="btn btn-primary">More Info</a>
+                    </div>
+                    </div>
+                </div>
+            </div>               
+DELIMITER;
+
+        echo $products;
+
+
+    }
+}
