@@ -2,8 +2,22 @@
 
 require_once("config.php");
 
+function setMessage($msg){
+    if(!empty($msg)){
+        $message = escape_string($msg);
+        $_SESSION['message'] = $message;
+    }
+}
+
+function displayMessage(){
+    if(isset($_SESSION['message'])){
+        echo $_SESSION['message'];
+        unset($_SESSION['message']);
+    }
+}
+
 function redirect($location){
-    return header("location : $location");
+    return header("location:$location");
 }
 
 function query($query){
@@ -122,5 +136,22 @@ DELIMITER;
         echo $products;
 
 
+    }
+}
+
+function login(){
+    if(isset($_POST['submit'])){
+        $username = escape_string($_POST['username']);
+        $password = escape_string($_POST['password']);
+        $result = query("SELECT * FROM users WHERE username='{$username}' AND password='{$password}'");
+        confirm($result);
+        if(mysqli_num_rows($result) == 0){
+            redirect("login.php");
+            setMessage("your username or password is incorrect");
+        }
+        else{
+            redirect("admin");
+
+        }
     }
 }
